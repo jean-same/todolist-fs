@@ -1,21 +1,30 @@
 const express = require("express");
 require('dotenv').config()
 
-const test = require('./utils/database')
-
-conn = test.getConnection();
-
-console.log(conn)
-
 const app = express();
 
+let testController = require('./controllers/testController')
 let tasksRouter = express.Router();
+const bodyParser = require("body-parser")
+const morgan = require("morgan")("dev")
 
 tasksRouter.route("/")
 
-    .get((req , res) => {
-        res.json("Homepage")
-    })
+    .get(testController.test )
 
+    .post(testController.postTest )
+
+tasksRouter.route("/:id")
+
+    .get(testController.test )
+
+    .put(testController.putTest )
+
+    .delete(testController.test )
+
+
+
+app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use( process.env.ROOT_API + "tasks" , tasksRouter)
 app.listen(process.env.SERVER_PORT);
