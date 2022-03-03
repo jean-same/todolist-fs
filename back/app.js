@@ -1,6 +1,12 @@
 const express = require("express");
 require('dotenv').config()
 
+const test = require('./utils/database')
+
+conn = test.getConnection();
+
+console.log(conn)
+
 const app = express();
 
 let tasksRouter = express.Router();
