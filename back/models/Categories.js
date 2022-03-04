@@ -1,8 +1,8 @@
-const db = require('../utils/database')
+const db = require('../utils/database');
 
 module.exports = {
 
-    async browse() {
+    async findAll() {
       try {
         conn = await db.getConnection();
 
@@ -16,7 +16,7 @@ module.exports = {
       }
     },
 
-    async read(id) {
+    async find(id) {
         try {
           conn = await db.getConnection();
           sql = "SELECT * FROM Categories WHERE id = ?";
@@ -28,7 +28,7 @@ module.exports = {
         }
       },
 
-      async edit(id , data) {
+      async update(id , data) {
         try {
           conn = await db.getConnection();
           const row = conn.query('UPDATE Categories SET ? WHERE id = ? ', [data , id])
@@ -40,7 +40,7 @@ module.exports = {
     },
 
 
-      async add(data) {
+      async insert(data) {
           try {
             conn = await db.getConnection();
             const row = conn.query('INSERT INTO Categories SET ?', data)

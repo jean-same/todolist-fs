@@ -2,7 +2,7 @@ const db = require('../utils/database')
 
 module.exports = {
 
-    async browse() {
+    async findAll() {
       try {
         conn = await db.getConnection();
 
@@ -16,7 +16,7 @@ module.exports = {
       }
     },
 
-    async read(id) {
+    async find(id) {
         try {
           conn = await db.getConnection();
           sql = "SELECT * FROM Tasks WHERE id = ?";
@@ -28,7 +28,7 @@ module.exports = {
         }
       },
 
-      async edit(id , data) {
+      async update(id , data) {
         try {
           conn = await db.getConnection();
           const row = conn.query('UPDATE Tasks SET ? WHERE id = ? ', [data , id])
@@ -37,10 +37,10 @@ module.exports = {
       } catch (err) {
             throw err
         }
-    },
+     },
 
 
-      async add(data) {
+      async insert(data) {
           try {
             conn = await db.getConnection();
             const row = conn.query('INSERT INTO Tasks SET ?', data)

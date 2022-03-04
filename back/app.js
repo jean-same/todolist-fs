@@ -1,30 +1,47 @@
-const express = require("express");
+const express = require("express")
 require('dotenv').config()
 
-const app = express();
+const app = express()
 
-let testController = require('./controllers/testController')
-let tasksRouter = express.Router();
+const taskController = require('./controllers/taskController')
+const categoryController = require('./controllers/categoryController')
+const tasksRouter = express.Router()
+const categoryRouter = express.Router()
 const bodyParser = require("body-parser")
 const morgan = require("morgan")("dev")
 
 tasksRouter.route("/")
 
-    .get(testController.test )
+    .get(taskController.browse)
 
-    .post(testController.postTest )
+    .post(taskController.add)
 
+    
 tasksRouter.route("/:id")
 
-    .get(testController.test )
+    .get(taskController.read)
 
-    .put(testController.putTest )
+    .put(taskController.edit)
 
-    .delete(testController.test )
+    .delete(taskController.delete)
 
+categoryRouter.route("/")
 
+    .get(categoryController.browse)
 
+    .post(categoryController.add)
+
+categoryRouter.route("/:id")
+
+    .get(categoryController.read)
+
+    .put(categoryController.edit)
+
+    .delete(categoryController.delete)
+
+app.use(morgan)
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use( process.env.ROOT_API + "tasks" , tasksRouter)
-app.listen(process.env.SERVER_PORT);
+app.use( process.env.ROOT_API + "categories" , categoryRouter)
+app.listen(process.env.SERVER_PORT)
