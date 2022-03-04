@@ -1,13 +1,24 @@
 const { successMessage, success , notFound , error } = require("../utils/functions")
 
-const Tasks = require('../models/Tasks')
+const Tasks = require('../models/Tasks');
+const { findBy } = require("../models/Tasks");
 
 module.exports = {
 
     async browse(req , res) {
         try {
 
-            const tasks = await Tasks.findAll()
+            let query = req.query
+            let tasks;
+
+            if(Object.keys(query).length == 1) {
+                const column = Object.keys(query)[0].trim()
+                const value = Object.values(query)[0].trim()
+
+                 tasks = await Tasks.findBy(column, value);
+            } else {
+                 tasks = await Tasks.findAll()
+            }
             
             if (tasks.length == 0) {
                 res.status(404).json(notFound())
@@ -17,6 +28,26 @@ module.exports = {
 
         } catch (err) {
             res.status(422).json(error(err))
+            console.log(err)
+        }
+    },
+
+    async browseBy(req , res) {
+        try {
+            let col = req.query.status
+
+            console.log(col)
+            /*const tasks = await Tasks.findBy("status", 2)
+            
+            if (tasks.length == 0) {
+                res.status(404).json(notFound())
+            } else {
+                res.status(200).json(success(tasks))
+            }
+*/
+        } catch (err) {
+            res.status(422).json(error(err))
+            console.log(err)
         }
     },
 
@@ -70,8 +101,8 @@ module.exports = {
             try {
                 const data = {
                     title : req.body.title,
-                    completion : req.body.completion,
-                    status : req.body.status,
+                    completion : req.body.completion ? req.body.completion : 0 ,
+                    status : req.body.status ? req.body.status : 1 ,
                     id_category : req.body.id_category
                 }
 

@@ -2,13 +2,13 @@ const db = require('../utils/database')
 
 module.exports = {
 
-    async findAll() {
+    async findAll(order = "ASC") {
       try {
         conn = await db.getConnection();
 
-        sql = 'SELECT `Tasks`.`id` as `id_task`, `Tasks`.`title` , `Tasks`.`completion` , `Tasks`.`status` , `Tasks`.`created_at` , `Cat`.`name` as `category_name` FROM `Tasks` LEFT JOIN `Categories` AS `Cat` ON `Tasks`.`id_category` = `Cat`.`id`'
+        sql = 'SELECT `Tasks`.`id` as `id_task`, `Tasks`.`title` , `Tasks`.`completion` , `Tasks`.`status` , `Tasks`.`created_at` , `Cat`.`name` as `category_name` FROM `Tasks` LEFT JOIN `Categories` AS `Cat` ON `Tasks`.`id_category` = `Cat`.`id` WHERE `Tasks`.`status` = 1 ORDER BY `Tasks`.`created_at` ' + order
 
-        const rows = await conn.query(sql);
+        const rows = await conn.query(sql , order);
 
         return rows;
       } catch (err) {
@@ -27,6 +27,19 @@ module.exports = {
           throw err;
         }
       },
+
+    async findBy(column, value) {
+        try {
+            conn = await db.getConnection();
+
+            sql = "SELECT * FROM Tasks WHERE " + column + " = ?";
+            const row = await conn.query(sql, [value] );
+  
+            return row;
+          } catch (err) {
+            throw err;
+          }
+    },
 
       async update(id , data) {
         try {
@@ -65,12 +78,12 @@ module.exports = {
                 if(del) {
                     return {
                         "status" : "success",
-                        "message" : "Tache supprimée avec succes"
+                        "message" : "Task deleted successfully"
                     }
                 } else {
                     return {
                         "status" : "error",
-                        "message" : "Une erreur s'est produite"
+                        "message" : "An error occured"
                     }
                 }
             } else {

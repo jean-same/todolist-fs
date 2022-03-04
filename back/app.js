@@ -39,6 +39,7 @@ categoryRouter.route("/:id")
 
     .delete(categoryController.delete)
 
+
 app.use(morgan)
 app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
