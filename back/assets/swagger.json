@@ -1,0 +1,238 @@
+{
+    "definitions": {},
+    "info": {
+      "title": "Todolist API",
+      "version": "1.0.0",
+      "license": {
+        "name": "ISC"
+      },
+      "description": "API REST for the todolist."
+    },
+    "basePath": "/api/v1",
+    "host": "localhost:3000",
+    "tags" : [
+        {
+            "name" : "Tasks",
+            "description" : "Methods for the tasks"
+        },
+        {
+            "name" : "Categories",
+            "description" : "Methods for the categories"
+        }
+    ],
+    "paths": {
+      "/tasks": {
+        "get": {
+          "summary": "tasks",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+                "name": "order",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "status",
+                "in": "query",
+                "required": false
+            },
+            {
+                "name": "completion",
+                "in": "query",
+                "required": false
+            }
+          ],
+          "responses": {},
+          "tags": ["Tasks"]
+        },
+        "post": {
+          "summary": "tasks",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+                "name": "title",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "completion",
+                "in": "body",
+                "required": false
+            },
+            {
+                "name": "status",
+                "in": "body",
+                "required": false
+            },
+            {
+                "name": "id_category",
+                "in": "body",
+                "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Tasks"]
+        }
+      },
+      "/tasks/{id}": {
+        "get": {
+          "summary": "tasks/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Tasks"]
+        },
+        "put": {
+          "summary": "tasks/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            },
+            {
+                "name": "title",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "completion",
+                "in": "body",
+                "required": false
+            },
+            {
+                "name": "status",
+                "in": "body",
+                "required": false
+            },
+            {
+                "name": "id_category",
+                "in": "body",
+                "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Tasks"]
+        },
+        "delete": {
+          "summary": "tasks/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Tasks"]
+        }
+      },
+      "/categories": {
+        "get": {
+          "summary": "categories",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [],
+          "responses": {},
+          "tags": ["Categories"]
+        },
+        "post": {
+          "summary": "categories",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+                "name": "name",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "status",
+                "in": "body",
+                "required": false
+            }
+          ],
+          "responses": {},
+          "tags": ["Categories"]
+        }
+      },
+      "/categories/{id}": {
+        "get": {
+          "summary": "categories/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Categories"]
+        },
+        "put": {
+          "summary": "categories/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            },
+            {
+                "name": "name",
+                "in": "body",
+                "required": true
+            },
+            {
+                "name": "status",
+                "in": "body",
+                "required": false
+            }
+          ],
+          "responses": {},
+          "tags": ["Categories"]
+        },
+        "delete": {
+          "summary": "categories/{id}",
+          "consumes": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {},
+          "tags": ["Categories"]
+        }
+      }
+    },
+    "swagger": "2.0"
+  }

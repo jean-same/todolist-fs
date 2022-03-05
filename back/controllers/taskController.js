@@ -9,15 +9,25 @@ module.exports = {
         try {
 
             let query = req.query
-            let tasks;
+            let tasks, columnToFind, columnValue
 
             if(Object.keys(query).length == 1) {
-                const column = Object.keys(query)[0].trim()
-                const value = Object.values(query)[0].trim()
+                columnToFind = Object.keys(query)[0]
+                columnValue = Object.keys(query)[0] == "order" ? Object.values(query)[0] : parseInt(Object.values(query)[0])
+            }
+            console.log(columnToFind)
 
-                 tasks = await Tasks.findBy(column, value);
+            if((columnToFind == "status" || columnToFind == "completion") && (Number.isInteger(columnValue))  ) {
+                 tasks = await Tasks.findBy(columnToFind.trim() , columnValue );
             } else {
-                 tasks = await Tasks.findAll()
+
+                if(columnToFind == "order" && columnValue.toUpperCase() == "DESC") {
+                    columnValue = columnValue.toUpperCase()
+                } else [
+                    columnValue = ""
+                ]
+
+                 tasks = await Tasks.findAll(columnValue)
             }
             
             if (tasks.length == 0) {
@@ -26,25 +36,6 @@ module.exports = {
                 res.status(200).json(success(tasks))
             }
 
-        } catch (err) {
-            res.status(422).json(error(err))
-            console.log(err)
-        }
-    },
-
-    async browseBy(req , res) {
-        try {
-            let col = req.query.status
-
-            console.log(col)
-            /*const tasks = await Tasks.findBy("status", 2)
-            
-            if (tasks.length == 0) {
-                res.status(404).json(notFound())
-            } else {
-                res.status(200).json(success(tasks))
-            }
-*/
         } catch (err) {
             res.status(422).json(error(err))
             console.log(err)
@@ -105,6 +96,8 @@ module.exports = {
                     status : req.body.status ? req.body.status : 1 ,
                     id_category : req.body.id_category
                 }
+
+                console.log(data)
 
                 await Tasks.insert(data)
                 res.status(201).json(successMessage("Task added successfully"))

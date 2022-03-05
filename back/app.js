@@ -1,6 +1,7 @@
 const express = require("express")
 require('dotenv').config()
 
+
 const app = express()
 
 const bodyParser = require("body-parser")
@@ -13,6 +14,12 @@ const categoriesRouter = require('./routers/categoriesRouters')
 app.use("/" , tasksRouter );
 app.use("/" , categoriesRouter );
 
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./assets/swagger.json');
+
+app.use( process.env.ROOT_API  + 'api-docs', swaggerUi.serve);
+app.get( process.env.ROOT_API  + 'api-docs', swaggerUi.setup(swaggerDocument));
 
 app.use(morgan)
 app.use(bodyParser.json()) // for parsing application/json
