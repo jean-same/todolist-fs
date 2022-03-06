@@ -6,7 +6,7 @@ module.exports = {
       try {
         conn = await db.getConnection();
 
-        sql = 'SELECT `Tasks`.`id` as `id_task`, `Tasks`.`title` , `Tasks`.`completion` , `Tasks`.`status` , `Tasks`.`created_at` , `Cat`.`name` as `category_name` FROM `Tasks` LEFT JOIN `Categories` AS `Cat` ON `Tasks`.`id_category` = `Cat`.`id` WHERE `Tasks`.`status` = 1 ORDER BY `Tasks`.`created_at` ' + order
+        sql = 'SELECT `Tasks`.`id` as `id_task`, `Tasks`.`title` , `Tasks`.`completion` , `Tasks`.`status` , `Tasks`.`created_at` , `Cat`.`id` as `id_category`, `Cat`.`name` as `category_name` FROM `Tasks` LEFT JOIN `Categories` AS `Cat` ON `Tasks`.`id_category` = `Cat`.`id` WHERE `Tasks`.`status` = 1 ORDER BY `Tasks`.`created_at` ' + order
 
         const rows = await conn.query(sql , order);
 

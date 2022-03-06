@@ -65,13 +65,15 @@ module.exports = {
             const task = await Tasks.find(id)
 
             if(task.length != 0 ) {
+
                 try {
                     const data = {
-                        title : req.body.title,
-                        completion : req.body.completion,
-                        status : req.body.status,
-                        id_category : req.body.id_category
+                        title : req.body.title ? req.body.title : task[0].title,
+                        completion : req.body.completion ? req.body.completion : task[0].completion,
+                        status : req.body.status ? req.body.status : task[0].status,
+                        id_category : req.body.id_category ? req.body.id_category : task[0].id_category,
                     }
+                    console.log(data)
 
                     await Tasks.update(id , data)
                     res.status(200).json(successMessage("Task edited successfully"))
