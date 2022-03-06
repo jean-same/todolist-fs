@@ -1,6 +1,6 @@
 const taskDisplay = {
 
-    baseUri : "http://0.0.0.0:3000/",
+    baseUri : "http://0.0.0.0:3000/api/v1/",
 
     fetchOptions: {
 
@@ -29,10 +29,11 @@ const taskDisplay = {
         } )
 
         .then(function(responseJson){
+            console.log(responseJson.result)
             
             let divTasks = document.querySelector('.tasks');
             
-            for(tasks of responseJson){
+            for(tasks of responseJson.result){
 
                 let template = document.querySelector("#task__template").content.cloneNode(true);
 
@@ -44,10 +45,10 @@ const taskDisplay = {
 
                 taskTitleLabel.textContent = tasks.title;
                 taskTitleInput.value = tasks.title;
-                taskCategoryP.textContent = tasks.category.name;
+                taskCategoryP.textContent = tasks.category_name;
                 progressBar.style.width = tasks.completion +"%";
-                divTask.dataset.category = tasks.category.name;
-                divTask.dataset.id = tasks.id
+                divTask.dataset.category = tasks.category_name;
+                divTask.dataset.id = tasks.id_task
 
                 if(tasks.status == 2){
                     divTask.classList.remove('task--todo');
