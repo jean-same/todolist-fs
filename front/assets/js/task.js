@@ -172,7 +172,7 @@ const task = {
         httpHeaders.append("Content-Type", "application/json");
 
         let fetchOptions = {
-            method: 'PATCH',
+            method: 'PUT',
             mode: 'cors',
             cache: 'no-cache',
             headers: httpHeaders,
@@ -225,14 +225,14 @@ const task = {
         const id = parseInt(incompleteButtonElementParent.dataset.id);
 
         const completion = {
-            completion : 0,
+            completion : 0.0001,
         };
 
         const httpHeaders = new Headers();
         httpHeaders.append("Content-Type", "application/json");
 
         let fetchOptions = {
-            method: 'PATCH',
+            method: 'PUT',
             mode: 'cors',
             cache: 'no-cache',
             headers: httpHeaders,
@@ -247,12 +247,13 @@ const task = {
                 fetch(task.baseUri + "tasks/" + id, fetchOptions)
             
                 .then(function(response) {
+                    console.log(response)
                         if (response.status == 200) {
                             //*J'enlève la classe task--todo sur la div
                             incompleteButtonElementParent.classList.remove('task--complete');
 
                             //*Je mets la barre de progression à 100%
-                            progressBar.style.width = 0 + '%';
+                            progressBar.style.width = 0.0001 + '%';
                             alert.alertSuccess('marquee comme incompléte');
                         }
                         else {
