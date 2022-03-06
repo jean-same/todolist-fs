@@ -1,16 +1,15 @@
 const express = require("express")
 require('dotenv').config()
 
-
+let cors = require('cors')
 const app = express()
+app.use(cors())
 
 const bodyParser = require("body-parser")
 const morgan = require("morgan")("dev")
 
 const tasksRouter = require('./routers/tasksRouters')
 const categoriesRouter = require('./routers/categoriesRouters')
-const globalRouters = require('./routers/globalRouters')
-
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./assets/swagger.json');
@@ -26,7 +25,6 @@ app.use( process.env.ROOT_API + "categories" , categoriesRouter)
 
 app.use("/" , tasksRouter );
 app.use("/" , categoriesRouter );
-app.use("/" , globalRouters );
 
 
 app.listen(process.env.SERVER_PORT)
