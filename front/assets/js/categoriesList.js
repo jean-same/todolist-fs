@@ -1,6 +1,6 @@
 const categoriesList = {
 
-    baseUri : "http://0.0.0.0:3000/",
+    baseUri : "http://0.0.0.0:3000/api/v1/",
 
     fetchOptions: {
 
@@ -27,7 +27,7 @@ const categoriesList = {
         } )
 
         .then(function(responseJson){
-            return responseJson;
+            return responseJson.result
         } )
 
         categoriesList.categoriesDisplay(infos, 'filter');
@@ -50,6 +50,7 @@ const categoriesList = {
 
         if(tab == 'add'){
             option.innerText = "Choisir une catégorie";
+            option.value = 0
             parentElementDiv = document.querySelector('#select__add')  ;
         }
 

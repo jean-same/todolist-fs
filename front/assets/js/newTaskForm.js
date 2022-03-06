@@ -3,10 +3,11 @@ const newTaskForm = {
     //*Je stocke le formulaire d'ajout pour eviter de refaire des document.querySelector à plusieurs endroits pour recuperer le formulaire
     form : document.querySelector('.task--add form'),
 
-    baseUri : "http://0.0.0.0:3000/",
+    baseUri : "http://0.0.0.0:3000/api/v1/",
+
+    success: null,
 
     init: function(){
-        //console.log("new task form Init !");
         
         newTaskForm.form.addEventListener('submit', newTaskForm.handleNewTaskFormSubmit);
     },
@@ -23,27 +24,27 @@ const newTaskForm = {
         //*Je recupere le select de mon formulaire
         const selectCategoryForm = document.querySelector('.task--add .select select');
 
-        const categoryId = selectCategoryForm.selectedIndex;
-       
+        const categoryId = selectCategoryForm.options[selectCategoryForm.selectedIndex].dataset.id;
         //*Je recupere la valeur du select
-        const categorySelect = selectCategoryForm.value;
+        const categoryName = selectCategoryForm;
+        console.log(categoryName)
 
-        //*Je vide l'input
-        inputTaskForm.value ="";
-        selectCategoryForm.value = "Choisir une catégorie";
+        if(newTaskForm.success) {
+         //*Je vide l'input
+            inputTaskForm.value ="";
+            selectCategoryForm.value = "Choisir une catégorie";
+        }
 
         //*Je mets le focus sur le champ input
         inputTaskForm.focus();
 
         //*** Je fais appel à handleTemplate pour ajouter la categorie(message de success si la tache a bien été ajoutée, message d'erreur dans le cas contraire)*/
-        newTaskForm.handleTemplate(taskTitle, categorySelect, categoryId);
+        newTaskForm.handleTemplate(taskTitle, categoryName, categoryId);
 
     },
 
     handleTemplate : function(taskTitle, categoryName, categoryId){
         if ("content" in document.createElement("template")) { 
-            let success = null;
-            let failed = null
 
             //*Je recupère le template
             var template = document.querySelector("#task__template").content.cloneNode(true);
@@ -57,12 +58,12 @@ const newTaskForm = {
 
 
             //*Je verifie si le titre de la taste et le nom de la categorie ne sont pas vide
-            if(taskTitle != '' && categoryName != 0) {
+            if(taskTitle != '' && categoryName.value != 0) {
 
                 //*Je stocke les 2 variable dans un objet data pour l'envoyer en format JSON
                 const data = {
                     "title" : taskTitle,
-                    "categoryId" : categoryId,
+                    "id_category" : categoryId,
                 };
 
                 const httpHeaders = new Headers();
@@ -84,6 +85,7 @@ const newTaskForm = {
                         //*Si le status de la requete est 201 ça veut dire que notre tache a bien été ajoutée coté bdd
                         //* On l'ajoute coté front
                         if (response.status == 201) {
+                            newTaskForm.success = true
                             //*J'ajoute le titre et le nom de la categorie
                             template.querySelector('.task__title-label').textContent = taskTitle;
                             template.querySelector('.task__title-field').innerText = taskTitle;
@@ -110,10 +112,13 @@ const newTaskForm = {
                         
                     }
                 )
+                .catch(function(error) {
+                    console.log('Il y a eu un problème avec l\'opération fetch: ' + error.message);
+                  });
    
             } else {
                 alert.alertEmptyField();
-
+                
             }
 
 
