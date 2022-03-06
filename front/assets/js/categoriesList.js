@@ -45,6 +45,7 @@ const categoriesList = {
 
         if(tab == 'filter') {
             option.innerText = "Toutes les catégories";
+            option.setAttribute("data-id", 0)
             parentElementDiv = document.querySelector('#select__filters');
         }
 

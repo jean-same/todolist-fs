@@ -20,8 +20,13 @@ const taskDisplay = {
     },
 
     loadTaskFromAPI: function(){
+        let test = ""
 
-        fetch(taskDisplay.baseUri + "tasks" , taskDisplay.fetchOptions )
+        if(filter.filter_archive) {
+            test = filter.filter_archive
+        }
+
+        fetch(taskDisplay.baseUri + "tasks" + test , taskDisplay.fetchOptions )
 
 
         .then(function(response){
@@ -29,9 +34,10 @@ const taskDisplay = {
         } )
 
         .then(function(responseJson){
-            console.log(responseJson.result)
             
             let divTasks = document.querySelector('.tasks');
+
+            divTasks.innerHTML = ""
             
             for(tasks of responseJson.result){
 
@@ -64,7 +70,7 @@ const taskDisplay = {
                 }
 
                 divTasks.appendChild(template);
-                taskDisplay.hideArchivedTask();
+               // taskDisplay.hideArchivedTask();
                 
                 task.init(divTask);
             }

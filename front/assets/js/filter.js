@@ -1,6 +1,8 @@
 const filter = {
 
-    showArchivedTasks: false,
+    showArchivedTasksButton: false,
+
+    filter_archive: false,
 
     filterButtons : document.querySelectorAll('.filters__task .button'),
 
@@ -73,54 +75,52 @@ const filter = {
 
     handleArchive : function(evt){
 
-        //filter.showArchivedTasks = true;
-
-        const selectFilter = document.querySelector('#select__filters select');
-
-        const selectValue = selectFilter.value;
-
-        //console.log(selectValue)
-
-        if(!filter.showArchivedTasks) {
+        if(!filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les tâches actives"
-            filter.hideOrShowActiveTasks(filter.showArchivedTasks, selectValue);
-            filter.showArchivedTasks = true
+            filter.filter_archive = "?status=2"
+            filter.showArchivedTasksButton = true 
+            taskDisplay.loadTaskFromAPI()
+            filter.hideOrShowActiveTasks()
             return
         } 
-        if (filter.showArchivedTasks) {
+
+        if (filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les archives"
-            filter.hideOrShowActiveTasks(filter.showArchivedTasks);
-            filter.showArchivedTasks = false
+            filter.filter_archive = false
+            filter.showArchivedTasksButton = false 
+            taskDisplay.loadTaskFromAPI()
+            filter.hideOrShowActiveTasks()
             return
         }
+        
     },
 
-    hideOrShowActiveTasks : function(whatToShow, category = "") {
+    hideOrShowActiveTasks : function() {
         
         let taskDivs = document.querySelectorAll('.task');
 
         for (const task of taskDivs){
 
-            let taskCategory = task.dataset.category
-
             let listOfClasses = task.classList;
             
-            if(!whatToShow) {
+            if(!filter.showArchivedTasksButton) {
                 task.removeAttribute('style', 'display : none');
-    
+                    
                 if (!listOfClasses.contains('task--archive') && !listOfClasses.contains('task--add')){
                     task.setAttribute('style', 'display : none'); 
                 }
+
             }
             
-            if(whatToShow){
+            if(filter.showArchivedTasksButton){
                 task.removeAttribute('style', 'display : none');
+
                 if (listOfClasses.contains('task--archive')){
                     task.setAttribute('style', 'display : none');
                 }
             }
         }
-    }
+    },
     
 
     }
