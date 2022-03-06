@@ -1,6 +1,6 @@
 const task = {
 
-    baseUri : "http://0.0.0.0:3000/",
+    baseUri : "http://0.0.0.0:3000/api/v1/",
  
 
     init : function(taskElement){

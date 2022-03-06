@@ -23,9 +23,9 @@ const alert = {
         })
     },
 
-    alertConfirmDelete : function () {
+    alertConfirmDelete : function (string = "") {
         return result = Swal.fire({
-            title: '<strong>Êtes vous sûrs?</strong>',
+            title: '<strong>Êtes vous sûrs de vouloir supprimer ' + string + '?</strong>',
             html: '<strong> Cette action est irréversible!!!! </strong>',
             icon: 'warning',
             showCancelButton: true,
