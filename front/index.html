@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TodoList</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+  <!--jbox -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.2/dist/jBox.all.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.2/dist/jBox.all.min.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <a href=".">
+          <h1 class="logo__title title is-3">TodoList</h1>
+        </a>
+      </div>
+      <div class="filters">
+        <div class="filters__task filters__task--completion buttons are-small has-addons">
+          <button class="filters__choice button is-info is-selected" data-filter="all">Toutes</button>
+          <button class="filters__choice button" data-filter="completes">Complètes</button>
+          <button class="filters__choice button" data-filter="incompletes">Incomplètes</button>
+        </div>
+        <div class="filters__task filters__task--category select is-small select__filters__add" id="select__filters">
+
+        </div>
+        <div class="filters__task filters__task--archived">
+          <a class="filters__choice" href="#">Voir les archives</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="task task--add">
+        <form method="POST">
+          <div class="task__content">
+            <div class="task__title">
+             <!-- <p class="task__title-label"></p> -->
+              <input class="task__title-field input" type="text" placeholder="Titre de la tâche" name="title" />
+            </div>
+            <div class="task__category">
+              <div class="select is-small select__filters__add" id="select__add">
+
+              </div>
+            </div>
+            <div class="task__buttons">
+              <button class="task__button task__button--add button is-info">
+                <span class="icon is-small">
+                  <i class="fa fa-plus"></i>
+                </span>
+                <span>Ajouter</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tasks">
+
+      </div> 
+
+      <template id="task__template">
+        <div class="task task--todo" data-category="Todo dataset" data-id="">
+          <div class="task__content">
+            <div class="task__title">
+              <p class="task__title-label">todo p label</p>
+              <input class="task__title-field input" type="text" value="todo input" placeholder=""
+                name="title" />
+            </div>
+            <div class="task__category">
+              <p>todo</p>
+            </div>
+            <div class="task__buttons">
+              <button class="task__button task__button--incomplete button is-success is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-step-backward"></i>
+                </span>
+              </button>
+              <button class="task__button task__button--desarchive button is-success is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-undo"></i>
+                </span>
+              </button>
+              <button class="task__button task__button--validate button is-success is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-check-square"></i>
+                </span>
+              </button>
+              <button class="task__button task__button--modify button is-warning is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-pen-square"></i>
+                </span>
+              </button>
+              <button class="task__button task__button--archive button is-danger is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-archive"></i>
+                </span>
+              </button>
+              <button class="task__button task__button--delete button is-danger is-small">
+                <span class="icon is-small">
+                  <i class="fa fa-trash"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__level" style="width:0%"></div>
+          </div>
+        </div>
+      </template>
+
+    </main>
+  </div>
+  <script type="text/javascript" src="assets/js/app.js"></script>
+  <script type="text/javascript" src="assets/js/task.js"></script>
+  <script type="text/javascript" src="assets/js/taskList.js"></script>
+  <script type="text/javascript" src="assets/js/newTaskForm.js"></script>
+  <script type="text/javascript" src="assets/js/filter.js"></script>
+  <script type="text/javascript" src="assets/js/categoriesList.js"></script>
+  <script type="text/javascript" src="assets/js/taskDisplay.js"></script>
+  <script type="text/javascript" src="assets/js/alerts.js"></script>
+</body>
+
+</html>
