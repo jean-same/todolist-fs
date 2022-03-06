@@ -9,10 +9,7 @@ const morgan = require("morgan")("dev")
 
 const tasksRouter = require('./routers/tasksRouters')
 const categoriesRouter = require('./routers/categoriesRouters')
-
-
-app.use("/" , tasksRouter );
-app.use("/" , categoriesRouter );
+const globalRouters = require('./routers/globalRouters')
 
 
 const swaggerUi = require('swagger-ui-express');
@@ -26,5 +23,10 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use( process.env.ROOT_API + "tasks" , tasksRouter)
 app.use( process.env.ROOT_API + "categories" , categoriesRouter)
+
+app.use("/" , tasksRouter );
+app.use("/" , categoriesRouter );
+app.use("/" , globalRouters );
+
 
 app.listen(process.env.SERVER_PORT)
