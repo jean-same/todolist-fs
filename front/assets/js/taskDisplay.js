@@ -20,13 +20,13 @@ const taskDisplay = {
     },
 
     loadTaskFromAPI: function(){
-        let test = ""
+        let query = ""
 
-        if(filter.filter_archive) {
-            test = filter.filter_archive
+        if(filter.filter_choice) {
+            query = filter.filter_choice
         }
 
-        fetch(taskDisplay.baseUri + "tasks" + test , taskDisplay.fetchOptions )
+        fetch(taskDisplay.baseUri + "tasks" + query , taskDisplay.fetchOptions )
 
         .then(function(response){
             return response.json() ;

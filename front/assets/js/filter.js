@@ -2,7 +2,7 @@ const filter = {
 
     showArchivedTasksButton: false,
 
-    filter_archive: false,
+    filter_choice: false,
 
     filterButtons : document.querySelectorAll('.filters__task .button'),
 
@@ -18,6 +18,10 @@ const filter = {
         const hideAndShowArchive = document.querySelector('.filters__task--archived');
 
         hideAndShowArchive.addEventListener('click', filter.handleArchive);
+
+        const filterSelectByDate = document.querySelector(".select__filters__date select")
+
+        filterSelectByDate.addEventListener("change" , filter.showByDate)
 
     },
 
@@ -77,7 +81,7 @@ const filter = {
 
         if(!filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les tâches actives"
-            filter.filter_archive = "?status=2"
+            filter.filter_choice = "?status=2"
             filter.showArchivedTasksButton = true 
             taskDisplay.init()
             filter.hideOrShowActiveTasks()
@@ -86,7 +90,7 @@ const filter = {
 
         if (filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les archives"
-            filter.filter_archive = false
+            filter.filter_choice = false
             filter.showArchivedTasksButton = false 
             taskDisplay.init()
             filter.hideOrShowActiveTasks()
@@ -122,5 +126,13 @@ const filter = {
         }
     },
     
+    showByDate : function (evt) {
+        const filterByDateSelectValue = evt.currentTarget.value;
+
+        if(filterByDateSelectValue == "ASC" || filterByDateSelectValue == "DESC") {
+            filter.filter_choice = "?order=" + filterByDateSelectValue
+            taskDisplay.init()
+        }
+    }
 
     }
