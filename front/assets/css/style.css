@@ -129,7 +129,7 @@
     width: 100%;
   }
   
-  .task--add .task__category, .category--add {
+  .task--add .task__category {
     width: 100%;
     margin-top: 0.5rem;
   }
@@ -145,6 +145,17 @@
   
   .task--add .task__button {
     font-size: 1rem;
+  }
+  .category {
+    display: flex;
+  }
+
+  .category form {
+    width: 70%;
+  }
+
+  .category .category--list {
+    width: 30%;
   }
   
   @media screen and (min-width: 640px) {
