@@ -2,6 +2,8 @@ const categoriesList = {
 
     baseUri : "http://0.0.0.0:3000/api/v1/",
 
+    jboxModalOpen: false,
+
     fetchOptions: {
 
         method: 'GET',
@@ -15,6 +17,10 @@ const categoriesList = {
     init: function(){
 
     categoriesList.loadCategoriesFromAPI();
+
+    const allCategories = document.querySelector('.category--list')
+
+    allCategories.addEventListener('click' , categoriesList.showAllCategories )
     
     },
 
@@ -56,57 +62,12 @@ const categoriesList = {
             option.innerText = result['name'];
             select.appendChild(option);
         }
-
-
-
-        new jBox('Modal', {
-            attach: '#myModal',
-            ajax: {
-            url: categoriesList.baseUri + "categories",
-            reload: 'strict',
-            setContent: false,
-            success: function (response) {
-                
-                console.log('jBox AJAX response', response.result);
-
-                let categoriesDisplay = "";
-
-                for(category of data) {
-                    categoriesDisplay += `
-                                               <tr>
-                                                <th scope="row" class="is-align-items-center pt-4"> ${category.name} </th>
-                                                <td class="td-button">
-                                                    <button href="#"  class="button is-danger supp" ><i class="fas fa-trash"></i></button>
-                                                </td>
-                                                </tr>
-                                           `
-                }
-
-
-                let arr = ` <b>Liste des catégories</b>
-                        <table class="table monTableau" id="tableauLivres">
-                            <thead class="thead-dark">
-                            <tr id="titresColonne">
-                                <th scope="col">Nom</th>
-                                <th colspan="2">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody id="tableauBody">
-                                ${categoriesDisplay}
-                            </tbody>
-                        </table>`
-
-                this.setContent(arr);
-            
-                
-            },
-            error: function () {
-                this.setContent('<b style="color: #d33">Error loading categories.</b>');
-            }
-            }
-        });
-
         
       parentElementDiv.appendChild(select);
+    },
+
+    showAllCategories : function () {
+        alert.ajax(categoriesList.baseUri + "categories")
+        
     }
 }

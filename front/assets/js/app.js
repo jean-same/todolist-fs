@@ -16,6 +16,7 @@ const app = {
         filter.init();
 
         categoriesList.init();
+
     },
 }
 

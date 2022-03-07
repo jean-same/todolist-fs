@@ -1,6 +1,54 @@
 
 const alert = {
 
+    ajax : function(req) {
+
+        return result = 
+        
+                $.ajax({
+                    url: req,
+                    type: "GET",
+                    success: function (result) {
+                        let categoriesDisplay = "";
+
+                        for(let category of result.result) {
+                            categoriesDisplay += `
+                                                       <tr>
+                                                        <th scope="row" class="is-align-items-center pt-4 "> ${category.name} </th>
+                                                        <td class="td-button">
+                                                            <button href="#"  class="button is-danger supp" data-id=${category.id}  ><i class="fas fa-trash"></i></button>
+                                                        </td>
+                                                        </tr>
+                                                   `
+                        }
+                
+                
+                        let arr = `
+                                <table class="table is-fullwidth" id="">
+                                    <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Nom</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="arr-category-body">
+                                        ${categoriesDisplay}
+                                    </tbody>
+                                </table>`;
+                        console.log(result)
+                        categoriesList.jboxModalOpen = true
+                        
+                        Swal.fire("Liste des categories", arr);
+                        category.init()
+                        
+                    },
+                    error: function () {
+                        Swal.fire("Error deleting!", "Please try again", "error");
+                    }
+                });
+
+    },
+
     alertSuccess : function(action){
         return result =  Swal.fire({
             position: 'center',
