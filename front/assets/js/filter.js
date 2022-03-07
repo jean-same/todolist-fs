@@ -78,11 +78,16 @@ const filter = {
     },
 
     handleArchive : function(evt){
+        const filterByDateDiv = document.querySelector(".filter-by-date-div")
 
         if(!filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les tâches actives"
             filter.filter_choice = "?status=2"
+            
             filter.showArchivedTasksButton = true 
+
+            filterByDateDiv.setAttribute('style', 'display : none !important');
+
             taskDisplay.init()
             filter.hideOrShowActiveTasks()
             return
@@ -91,7 +96,11 @@ const filter = {
         if (filter.showArchivedTasksButton) {
             document.querySelector('.filters__task--archived a').innerText = "Voir les archives"
             filter.filter_choice = false
+
             filter.showArchivedTasksButton = false 
+
+            filterByDateDiv.removeAttribute('style', 'display : none !important');
+
             taskDisplay.init()
             filter.hideOrShowActiveTasks()
             return

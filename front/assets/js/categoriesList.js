@@ -30,7 +30,6 @@ const categoriesList = {
             return responseJson.result
         } )
 
-        categoriesList.categoriesDisplay(infos, 'filter');
         categoriesList.categoriesDisplay(infos, 'add');
     },
 
@@ -42,12 +41,6 @@ const categoriesList = {
 
         
         let parentElementDiv = null;
-
-        if(tab == 'filter') {
-            option.innerText = "Toutes les catégories";
-            option.setAttribute("data-id", 0)
-            parentElementDiv = document.querySelector('#select__filters');
-        }
 
         if(tab == 'add'){
             option.innerText = "Choisir une catégorie";
