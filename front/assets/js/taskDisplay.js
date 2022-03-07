@@ -75,7 +75,7 @@ const taskDisplay = {
                     task.init(divTask);
                 }
             } else {
-                  divTasks.innerHTML = "<h1 class='has-text-centered'>Pas de tache à afficher</h1>"  
+                  divTasks.innerHTML = "<h1 class='has-text-centered is-size-1 mt-5'>Pas de tache à afficher</h1>"  
             }
 
         }) 

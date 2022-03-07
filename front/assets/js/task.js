@@ -124,7 +124,7 @@ const task = {
         httpHeaders.append("Content-Type", "application/json");
 
         let fetchOptions = {
-            method: 'PATCH',
+            method: 'PUT',
             mode: 'cors',
             cache: 'no-cache',
             headers: httpHeaders,
