@@ -303,6 +303,8 @@ const task = {
                         archiveButtonElementParent.classList.remove("task--desarchive");
                         archiveButtonElementParent.classList.add('task--archive');
                         alert.alertSuccess('archivée');
+                        alert.timeoutSet();
+                        alert.timeoutClear(alert.timeoutSet());
                     return;
                     } else {
                         alert.alertSomethingWentWrong();
@@ -322,6 +324,7 @@ const task = {
         const desarchiveButtonElementParent = desarchiveButtonElement.closest('.task');
 
         const id = parseInt(desarchiveButtonElementParent.dataset.id);
+        console.log(desarchiveButtonElementParent)
 
         const status = {
             status : 1,
@@ -347,6 +350,7 @@ const task = {
                     if (response.status == 200) {        
                     desarchiveButtonElementParent.classList.remove('task--archive');
                     desarchiveButtonElementParent.classList.add('task--desarchive');
+                    alert.alertSuccess('desarchivée');
                     return;
                 } else {
                     alert.alertSomethingWentWrong();
@@ -384,7 +388,7 @@ const task = {
             fetch(task.baseUri + "tasks/" + id, fetchOptions)
     
             .then(function(response) {
-                    if (response.status == 204) {
+                    if (response.status == 200) {
 
                         alert.alertSuccess('suprimée');
                         alert.timeoutSet();
@@ -397,9 +401,7 @@ const task = {
             } else if (result.dismiss === Swal.DismissReason.cancel ) {
                 alert.alertCancelled();
             }
-
         })
-
     }
 
 

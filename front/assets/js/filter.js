@@ -79,7 +79,7 @@ const filter = {
             document.querySelector('.filters__task--archived a').innerText = "Voir les tâches actives"
             filter.filter_archive = "?status=2"
             filter.showArchivedTasksButton = true 
-            taskDisplay.loadTaskFromAPI()
+            taskDisplay.init()
             filter.hideOrShowActiveTasks()
             return
         } 
@@ -88,7 +88,7 @@ const filter = {
             document.querySelector('.filters__task--archived a').innerText = "Voir les archives"
             filter.filter_archive = false
             filter.showArchivedTasksButton = false 
-            taskDisplay.loadTaskFromAPI()
+            taskDisplay.init()
             filter.hideOrShowActiveTasks()
             return
         }

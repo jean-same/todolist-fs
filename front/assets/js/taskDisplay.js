@@ -28,7 +28,6 @@ const taskDisplay = {
 
         fetch(taskDisplay.baseUri + "tasks" + test , taskDisplay.fetchOptions )
 
-
         .then(function(response){
             return response.json() ;
         } )
@@ -38,44 +37,48 @@ const taskDisplay = {
             let divTasks = document.querySelector('.tasks');
 
             divTasks.innerHTML = ""
-            
-            for(tasks of responseJson.result){
-
-                let template = document.querySelector("#task__template").content.cloneNode(true);
-
-                const taskTitleLabel = template.querySelector('.task__title-label');
-                const taskTitleInput = template.querySelector('.task__title-field');
-                const taskCategoryP = template.querySelector('.task__category');
-                const progressBar = template.querySelector('.progress-bar__level');
-                const divTask = template.querySelector('.task');
-
-                taskTitleLabel.textContent = tasks.title;
-                taskTitleInput.value = tasks.title;
-                taskCategoryP.textContent = tasks.category_name;
-                progressBar.style.width = tasks.completion +"%";
-                divTask.dataset.category = tasks.category_name;
-                divTask.dataset.id = tasks.id_task
-
-                if(tasks.status == 2){
-                    divTask.classList.remove('task--todo');
-                    divTask.classList.remove('task--edit');
-                    divTask.classList.add('task--archive');
-                    //divTask.style.display = 'none'
-                }
+            if (responseJson.result) {
                 
-                if(tasks.completion == 100){
-                    divTask.classList.remove('task--todo');
-                    divTask.classList.remove('task--edit');
-                    divTask.classList.add('task--complete');
-                }
+                for(tasks of responseJson.result){
 
-                divTasks.appendChild(template);
-               // taskDisplay.hideArchivedTask();
-                
-                task.init(divTask);
+                    let template = document.querySelector("#task__template").content.cloneNode(true);
+
+                    const taskTitleLabel = template.querySelector('.task__title-label');
+                    const taskTitleInput = template.querySelector('.task__title-field');
+                    const taskCategoryP = template.querySelector('.task__category');
+                    const progressBar = template.querySelector('.progress-bar__level');
+                    const divTask = template.querySelector('.task');
+
+                    taskTitleLabel.textContent = tasks.title;
+                    taskTitleInput.value = tasks.title;
+                    taskCategoryP.textContent = tasks.category_name;
+                    progressBar.style.width = tasks.completion +"%";
+                    divTask.dataset.category = tasks.category_name;
+                    divTask.dataset.id = tasks.id
+
+                    if(tasks.status == 2){
+                        divTask.classList.remove('task--todo');
+                        divTask.classList.remove('task--edit');
+                        divTask.classList.add('task--archive');
+                        //divTask.style.display = 'none'
+                    }
+                    
+                    if(tasks.completion == 100){
+                        divTask.classList.remove('task--todo');
+                        divTask.classList.remove('task--edit');
+                        divTask.classList.add('task--complete');
+                    }
+
+                    divTasks.appendChild(template);
+                // taskDisplay.hideArchivedTask();
+                    
+                    task.init(divTask);
+                }
+            } else {
+                  divTasks.innerHTML = "<h1 class='has-text-centered'>Pas de tache à afficher</h1>"  
             }
 
-        })
+        }) 
     },
 
     hideArchivedTask : function () {
