@@ -5,11 +5,12 @@ const alert = {
         return result =  Swal.fire({
             position: 'center',
             icon: 'success',
-            title: 'Tache ' + action ,
+            title: action ,
             showConfirmButton: false,
             timer: 1500
         })
     },
+    
 
     alertConfirm : function(phrase){
         return result = Swal.fire({
@@ -82,7 +83,7 @@ const alert = {
 
             color: "red",
             title: "",
-            content: "<h5> <strong>Veuillez remplir les 2 champs avant de soumettre le formulaire !!</strong> </h5> ",
+            content: "<h5> <strong>Veuillez remplir les champs obligatoires avant de soumettre le formulaire !!</strong> </h5> ",
             autoClose: 3000,
         });
     },

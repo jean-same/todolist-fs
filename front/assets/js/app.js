@@ -11,6 +11,8 @@ const app = {
 
         newTaskForm.init();
 
+        newCategoryForm.init();
+
         filter.init();
 
         categoriesList.init();

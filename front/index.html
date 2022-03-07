@@ -43,14 +43,32 @@
           <div class="task__content">
             <div class="task__title">
              <!-- <p class="task__title-label"></p> -->
-              <input class="task__title-field input" type="text" placeholder="Titre de la tâche" name="title" />
+              <input class="task__title-field input is-small" type="text" placeholder="Titre de la tâche" name="title" />
             </div>
             <div class="task__category">
-              <div class="select is-small select__filters__add" id="select__add">
+              <div class="select select__filters__add" id="select__add">
 
               </div>
             </div>
             <div class="task__buttons">
+              <button class="task__button task__button--add button is-info">
+                <span class="icon is-small">
+                  <i class="fa fa-plus"></i>
+                </span>
+                <span>Ajouter</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="category category--add mt-5">
+        <form method="POST">
+          <div class="category__content columns">
+            <div class="category__name column is-four-fifths">
+              <input class="category__name-field input" type="text" placeholder="Nom de la catégorie" name="name" />
+            </div>
+            <div class="category__buttons column">
               <button class="task__button task__button--add button is-info">
                 <span class="icon is-small">
                   <i class="fa fa-plus"></i>
@@ -136,6 +154,7 @@
   <script type="text/javascript" src="assets/js/task.js"></script>
   <script type="text/javascript" src="assets/js/taskList.js"></script>
   <script type="text/javascript" src="assets/js/newTaskForm.js"></script>
+  <script type="text/javascript" src="assets/js/newCategoryForm.js"></script>
   <script type="text/javascript" src="assets/js/filter.js"></script>
   <script type="text/javascript" src="assets/js/categoriesList.js"></script>
   <script type="text/javascript" src="assets/js/taskDisplay.js"></script>
