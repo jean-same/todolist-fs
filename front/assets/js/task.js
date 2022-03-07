@@ -194,7 +194,7 @@ const task = {
 
                             //*Je mets la barre de progression à 100%
                             progressBar.style.width = 100 + '%';
-                            alert.alertSuccess('compléte');
+                            alert.alertSuccess('Tache compléte');
                         }
                         else {
                             alert.alertSomethingWentWrong();
@@ -254,7 +254,7 @@ const task = {
 
                             //*Je mets la barre de progression à 100%
                             progressBar.style.width = 0.0001 + '%';
-                            alert.alertSuccess('marquee comme incompléte');
+                            alert.alertSuccess('Tache marquee comme incompléte');
                         }
                         else {
                             alert.alertSomethingWentWrong();
@@ -302,7 +302,7 @@ const task = {
                     if (response.status == 200) {
                         archiveButtonElementParent.classList.remove("task--desarchive");
                         archiveButtonElementParent.classList.add('task--archive');
-                        alert.alertSuccess('archivée');
+                        alert.alertSuccess('Tache archivée');
                         alert.timeoutSet();
                         alert.timeoutClear(alert.timeoutSet());
                     return;
@@ -350,7 +350,7 @@ const task = {
                     if (response.status == 200) {        
                     desarchiveButtonElementParent.classList.remove('task--archive');
                     desarchiveButtonElementParent.classList.add('task--desarchive');
-                    alert.alertSuccess('desarchivée');
+                    alert.alertSuccess('Tache desarchivée');
                     return;
                 } else {
                     alert.alertSomethingWentWrong();
@@ -390,7 +390,7 @@ const task = {
             .then(function(response) {
                     if (response.status == 200) {
 
-                        alert.alertSuccess('suprimée');
+                        alert.alertSuccess('Tache suprimée');
                         alert.timeoutSet();
                         alert.timeoutClear(alert.timeoutSet());
                     }

@@ -102,7 +102,7 @@ const newTaskForm = {
                             //*J'ajoute le template rempli comme enfant de tasks
                             parentTaskElement.appendChild(template);
 
-                            alert.alertSuccess('ajoutée');
+                            alert.alertSuccess('Tache ajoutée');
 
                             task.init(divTask);
                             alert.timeoutSet();
